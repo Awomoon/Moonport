@@ -36,10 +36,12 @@ export type SkillGroup = {
 export const site = {
   name: "Moontech",
   fullName: "Ayotunde Raphael Awoyemi",
+  /** How he's introduced in short copy. Same name order as fullName. */
+  shortName: "Raphael Awoyemi",
   handle: "@awomoon",
-  title: "Moontech — Awoyemi Raphael, full-stack developer",
+  title: "Moontech — Ayotunde Raphael Awoyemi, full-stack developer",
   description:
-    "Awoyemi Raphael (Moontech) — full-stack developer in Ibadan, Nigeria. Flutter, React and Node, with a habit of building things that keep working offline.",
+    "Ayotunde Raphael Awoyemi (Moontech) — full-stack developer in Ibadan, Nigeria. Flutter, React and Node, with a habit of building things that keep working offline.",
   url: "https://awomoon.github.io/Moonport",
   locale: "en_NG",
 } as const;
@@ -48,7 +50,7 @@ export const hero = {
   eyebrow: "Open for freelance & collaboration",
   // Rendered one line per array entry; the last line gets the aurora gradient.
   headline: ["Apps that work", "when the", "network won't"],
-  lede: "I'm Awoyemi Raphael — a full-stack developer in Ibadan, Nigeria, building mobile and web products with Flutter, React and Firebase. Lately that means software for shops that can't count on the network.",
+  lede: `I'm ${site.shortName} — a full-stack developer in Ibadan, Nigeria, building mobile and web products with Flutter, React and Firebase. Lately that means software for shops that can't count on the network.`,
   primaryCta: { label: "See the work", href: "#work" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   stats: [
