@@ -45,6 +45,17 @@ function coverStyle(index: number): CSSProperties {
   };
 }
 
+/** Ties the hover ring and pointer spotlight to this card's cover colours. */
+function accentStyle(index: number): CSSProperties {
+  const [warm, cool] = COVER_PAIRS[index % COVER_PAIRS.length];
+  return {
+    "--rim-a": `var(${warm})`,
+    "--rim-b": `var(${cool})`,
+    "--spot-tint": `var(${cool})`,
+    "--spot-hot": `var(${warm})`,
+  } as CSSProperties;
+}
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const featured = Boolean(project.featured);
 
@@ -52,6 +63,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <GlassCard
       as="li"
       tilt={featured ? 4 : 7}
+      style={accentStyle(index)}
       className={cn(
         "flex flex-col",
         featured ? "lg:col-span-2" : "lg:col-span-1",

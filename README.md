@@ -28,9 +28,13 @@ export const projects: Project[] = [ ... ];
 export const experience: Chapter[] = [ ... ];       // build chapters, not employers
 ```
 
-Project images are optional. Drop a file in `public/` and set `image: "/work/helios.png"` on
-the project — without one, the card falls back to a generated gradient cover with a large
-index number.
+Project images are optional. Drop a file in `public/work/` and set
+`image: "/work/shoka.png"` on the project; without one the card falls back to a generated
+gradient cover with a large index number.
+
+Covers are **landscape** (roughly 3:1, and 4:1 on the featured card) and rendered with
+`object-cover`. A single portrait phone screenshot will therefore be cropped to a narrow
+band — compose two or three device shots side by side on a wide canvas instead.
 
 ### Theming
 

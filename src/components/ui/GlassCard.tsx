@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
@@ -11,6 +11,8 @@ type GlassCardProps = {
   /** Degrees of 3D lean toward the pointer. 0 disables the tilt. */
   tilt?: number;
   as?: "div" | "article" | "li";
+  /** Inline style — used to pass per-card `--rim-*` / `--spot-*` tints. */
+  style?: CSSProperties;
 };
 
 /**
@@ -23,6 +25,7 @@ export function GlassCard({
   className,
   tilt = 6,
   as: Tag = "div",
+  style,
 }: GlassCardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -79,14 +82,17 @@ export function GlassCard({
     <Tag
       // @ts-expect-error — one ref type across the small set of allowed tags
       ref={ref}
+      style={style}
       className={cn(
         "glass glass-rim group relative isolate overflow-hidden rounded-3xl [transform-style:preserve-3d] [perspective:1200px]",
         className,
       )}
     >
+      {/* Pointer spotlight: a broad tinted wash plus a tighter hot spot, so the
+          surface reads as wet glass catching a light rather than a flat tint. */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[var(--spot-opacity,0)] transition-opacity duration-500 [background:radial-gradient(420px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),rgba(167,139,250,0.18),transparent_65%)]"
+        className="pointer-events-none absolute inset-0 opacity-[var(--spot-opacity,0)] transition-opacity duration-500 [background:radial-gradient(460px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-tint,var(--color-plasma))_26%,transparent),transparent_62%),radial-gradient(140px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-hot,var(--color-aurora))_20%,transparent),transparent_70%)]"
       />
       {children}
     </Tag>

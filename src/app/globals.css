@@ -145,35 +145,71 @@
 }
 
 /* Animated conic gradient ring used on hover for cards & buttons */
+/* Hover ring: a light source travelling around the border.
+   `--rim-a` / `--rim-b` let each card tint its own ring; they fall back to the
+   house accents so buttons and one-off panels need set nothing. */
 @utility glass-rim {
   &::after {
     content: "";
     position: absolute;
     inset: -1px;
     border-radius: inherit;
-    padding: 1px;
+    padding: 1.5px;
     background: conic-gradient(
       from var(--rim-angle, 0deg),
       transparent 0deg,
-      color-mix(in oklab, var(--color-aurora) 80%, transparent) 60deg,
-      color-mix(in oklab, var(--color-plasma) 80%, transparent) 140deg,
-      transparent 220deg
+      color-mix(in oklab, var(--rim-a, var(--color-aurora)) 95%, transparent)
+        40deg,
+      color-mix(in oklab, var(--rim-b, var(--color-plasma)) 100%, transparent)
+        95deg,
+      color-mix(in oklab, var(--rim-a, var(--color-aurora)) 65%, transparent)
+        150deg,
+      transparent 215deg,
+      transparent 360deg
     );
-    mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    mask-composite: exclude;
+    /* Ring cut-out. The prefixed shorthand MUST come before the standard
+       `mask-composite`: `-webkit-mask` is an alias of `mask` in modern
+       Chromium, so declaring it afterwards resets the composite back to
+       `add` and the conic fills the whole card instead of just its border. */
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
     opacity: 0;
-    transition: opacity 0.45s var(--ease-liquid);
+    transition: opacity 0.5s var(--ease-liquid);
+    pointer-events: none;
+  }
+
+  /* A soft bloom just outside the ring, so it reads as light rather than a
+     drawn line. Sits behind the card's own content. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    opacity: 0;
+    transition: opacity 0.5s var(--ease-liquid);
+    box-shadow:
+      0 0 28px -6px
+        color-mix(in oklab, var(--rim-b, var(--color-plasma)) 55%, transparent),
+      0 0 70px -18px
+        color-mix(in oklab, var(--rim-a, var(--color-aurora)) 45%, transparent);
     pointer-events: none;
   }
 
   &:hover::after,
   &:focus-within::after {
+    opacity: 1;
+    /* The angle is a registered @property, so this interpolates smoothly. */
+    animation: rim-spin 5s linear infinite;
+  }
+
+  &:hover::before,
+  &:focus-within::before {
     opacity: 1;
   }
 }
