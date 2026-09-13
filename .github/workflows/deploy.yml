@@ -2,9 +2,11 @@ name: Deploy to GitHub Pages
 
 on:
   push:
+    # Only main. The github-pages environment restricts deployments to the
+    # default branch, so a run from any other branch builds fine and then
+    # fails at deploy — noise that also holds the `pages` concurrency group.
     branches:
       - main
-      - claude/nextjs-portfolio-dark-liquid-6fp8it
   workflow_dispatch:
 
 # Allow the workflow to publish to Pages.
