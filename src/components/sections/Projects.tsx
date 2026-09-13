@@ -5,7 +5,7 @@ import { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
-import { projects, type Project } from "@/content/site";
+import { projects, sections, type Project } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cn, pad } from "@/lib/utils";
@@ -173,9 +173,9 @@ export function Projects() {
     <section ref={root} id="work" className="band">
       <div className="shell">
         <SectionHeading
-          eyebrow="Selected work"
-          title="Things I've built and still stand behind."
-          lede="A mix of client work, product engineering, and a couple of side projects that got out of hand."
+          eyebrow={sections.work.eyebrow}
+          title={sections.work.title}
+          lede={sections.work.lede}
         />
 
         <ul

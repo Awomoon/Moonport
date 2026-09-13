@@ -1,6 +1,9 @@
 /**
  * Single source of truth for everything on the site.
- * Edit this file to make the portfolio yours — no component changes needed.
+ * Edit this file to change the portfolio — no component changes needed.
+ *
+ * Content here is drawn from the Awomoon GitHub profile README and the
+ * repositories themselves, so blurbs describe what each project actually does.
  */
 
 export type Project = {
@@ -17,10 +20,10 @@ export type Project = {
   featured?: boolean;
 };
 
-export type Role = {
-  company: string;
-  title: string;
+/** A period of work. Deliberately not framed as employment. */
+export type Chapter = {
   period: string;
+  title: string;
   summary: string;
   highlights: string[];
 };
@@ -31,203 +34,235 @@ export type SkillGroup = {
 };
 
 export const site = {
-  name: "Moonport",
+  name: "Moontech",
   handle: "@awomoon",
-  title: "Moonport — Full-stack developer portfolio",
+  title: "Moontech — Awoyemi Raphael, full-stack developer",
   description:
-    "Portfolio of a full-stack web developer building fast, considered interfaces for the web.",
-  url: "https://moonport.dev",
-  locale: "en_US",
+    "Awoyemi Raphael (Moontech) — full-stack developer in Ibadan, Nigeria. Flutter, React and Node, with a habit of building things that keep working offline.",
+  url: "https://awomoon.github.io/Moonport",
+  locale: "en_NG",
 } as const;
 
 export const hero = {
-  eyebrow: "Available for new work",
+  eyebrow: "Open for freelance & collaboration",
   // Rendered one line per array entry; the last line gets the aurora gradient.
-  headline: ["Interfaces that", "feel like", "liquid glass"],
-  lede: "I'm a full-stack developer shaping fast, tactile products for the web — from the type scale up to the deploy pipeline.",
+  headline: ["Apps that work", "when the", "network won't"],
+  lede: "I'm Awoyemi Raphael — a full-stack developer in Ibadan, Nigeria, building mobile and web products with Flutter, React and Firebase. Lately that means software for shops that can't count on the network.",
   primaryCta: { label: "See the work", href: "#work" },
   secondaryCta: { label: "Get in touch", href: "#contact" },
   stats: [
-    { value: 6, suffix: "+", label: "Years shipping" },
-    { value: 40, suffix: "+", label: "Projects delivered" },
-    { value: 12, suffix: "", label: "Open-source repos" },
+    { value: 1, suffix: "+", label: "Years building" },
+    { value: 25, suffix: "+", label: "Public repositories" },
+    { value: 5, suffix: "", label: "Languages in daily use" },
   ],
+} as const;
+
+/** The three floating glass panels beside the hero headline. */
+export const heroPanels = {
+  code: {
+    filename: "main.dart",
+    lines: [
+      { text: "void main() => runApp(", tone: "accent", indent: false },
+      { text: "const MoontechApp(),", tone: "muted", indent: true },
+      { text: ");", tone: "accent", indent: false },
+    ],
+  },
+  metric: {
+    label: "Shoka",
+    value: "0",
+    caption: "Backend servers",
+  },
+  note: {
+    label: "Currently",
+    text: "Adding cloud backup, Paystack payments and barcode scanning to Shoka.",
+  },
 } as const;
 
 export const about = {
   eyebrow: "About",
-  heading: "I build the whole thing — not just the pretty half.",
+  heading: "Ibadan-based, Flutter-first, and stubborn about apps that survive a dead signal.",
   paragraphs: [
-    "I'm a developer who cares about the seam where design meets engineering. Most of my work lives in TypeScript: React and Next.js on the front, Node and Postgres behind it, with a stubborn bias toward things that load fast on a bad connection.",
-    "Before this I spent a few years in agency land, which is where I learned to ship on a deadline, read a Figma file properly, and say no to a carousel. These days I take on product work, design engineering, and the occasional performance rescue.",
+    "I build cross-platform products — Flutter and Dart on mobile, React and Next.js on the web, Node and Firebase behind both. Most of what I ship is aimed at people on cheap Android phones and unreliable connections, which turns offline-first from a nice-to-have into the actual design constraint.",
+    "That shows up in the work. Shoka, my point-of-sale app, has no server at all: every sale is a single SQLite transaction that rolls back rather than let stock go negative. I care about the same things on the web — clean, maintainable code, a user-first interface, and no spinner where a local read would do.",
   ],
   nowPlaying: [
-    "Building a real-time collaboration layer with WebRTC",
-    "Reading — Designing Data-Intensive Applications",
-    "Learning Rust, slowly and badly",
+    "Deepening advanced Flutter patterns and Firebase architecture",
+    "Adding cloud backup, Paystack and barcode scanning to Shoka",
+    "Exploring AI/ML features inside mobile apps",
   ],
 } as const;
 
 export const skills: SkillGroup[] = [
   {
-    label: "Front of house",
+    label: "Mobile",
+    items: ["Flutter", "Dart", "React Native", "Expo", "SQLite", "Android Studio"],
+  },
+  {
+    label: "Web",
     items: [
-      "TypeScript",
       "React",
       "Next.js",
+      "TypeScript",
+      "JavaScript",
       "Tailwind CSS",
-      "GSAP",
-      "Framer Motion",
-      "Three.js",
-      "Vue",
+      "HTML",
+      "CSS",
     ],
   },
   {
-    label: "Back of house",
+    label: "Backend & data",
     items: [
       "Node.js",
-      "tRPC",
-      "PostgreSQL",
-      "Prisma",
-      "Redis",
-      "GraphQL",
-      "Python",
-      "Go",
+      "Express",
+      "Firebase",
+      "Supabase",
+      "MongoDB",
+      "MySQL",
+      "PHP",
+      "Laravel",
     ],
   },
   {
-    label: "Everything else",
-    items: [
-      "Docker",
-      "AWS",
-      "Vercel",
-      "CI/CD",
-      "Playwright",
-      "Vitest",
-      "Figma",
-      "Accessibility",
-    ],
+    label: "Tooling",
+    items: ["Git", "GitHub", "VS Code", "Postman", "Vite", "UI/UX design"],
   },
 ];
 
 export const projects: Project[] = [
   {
-    slug: "helios",
-    title: "Helios Analytics",
+    slug: "shoka",
+    title: "Shoka",
     blurb:
-      "A real-time product analytics dashboard handling 40M events a day. Rebuilt the query layer around materialised rollups and cut p95 dashboard load from 4.1s to 380ms.",
-    year: "2025",
-    role: "Lead front-end",
-    stack: ["Next.js", "TypeScript", "ClickHouse", "tRPC"],
-    live: "#",
-    repo: "#",
+      "An offline-first point-of-sale and inventory tracker for small Nigerian shops — record a sale in under five seconds while the customer waits. No account, no backend, no network: everything lives in SQLite on the device, and a sale writes its line items and stock decrements in one transaction that rolls back rather than let stock go negative.",
+    year: "2026",
+    role: "Solo build",
+    stack: ["Expo", "React Native", "SQLite", "Reanimated"],
+    live: "https://awomoon.github.io/shoka/",
+    repo: "https://github.com/Awomoon/shoka",
     featured: true,
   },
   {
-    slug: "tidepool",
-    title: "Tidepool",
+    slug: "moon-directory",
+    title: "Moon Directory",
     blurb:
-      "Collaborative moodboarding for design teams — multiplayer canvas, CRDT sync, and an offline-first cache so the board never blocks on the network.",
-    year: "2024",
+      "A directory where founders pitch startup ideas and the community votes them up. Built on the Next.js App Router with NextAuth for sessions and a Radix-based component layer.",
+    year: "2025",
     role: "Full-stack",
-    stack: ["React", "Yjs", "WebRTC", "Postgres"],
-    live: "#",
-    repo: "#",
+    stack: ["Next.js", "NextAuth", "TypeScript", "Tailwind"],
+    repo: "https://github.com/Awomoon/Moon-Pitch",
   },
   {
-    slug: "northwind",
-    title: "Northwind Commerce",
+    slug: "moonconvert",
+    title: "MoonConvert",
     blurb:
-      "Headless storefront for a 12k-SKU retailer. Incremental static regeneration, edge-side personalisation, and a checkout that converts 23% better than the old one.",
-    year: "2024",
-    role: "Design engineer",
-    stack: ["Next.js", "Shopify", "Edge Runtime"],
-    live: "#",
-  },
-  {
-    slug: "lumen",
-    title: "Lumen UI",
-    blurb:
-      "An open-source component library of 48 accessible primitives, fully typed, themeable via CSS custom properties, and shipped with zero runtime CSS-in-JS.",
-    year: "2023",
-    role: "Maintainer",
-    stack: ["React", "Radix", "Tailwind"],
-    repo: "#",
-  },
-  {
-    slug: "driftwood",
-    title: "Driftwood",
-    blurb:
-      "A generative audio-reactive landing experience built with WebGL shaders and GSAP timelines. Runs at 60fps on a five-year-old laptop.",
-    year: "2023",
-    role: "Creative dev",
-    stack: ["Three.js", "GLSL", "GSAP"],
-    live: "#",
-  },
-  {
-    slug: "atlas",
-    title: "Atlas Docs",
-    blurb:
-      "Documentation platform with MDX authoring, instant search across 9k pages, and a versioned API reference generated straight from OpenAPI specs.",
-    year: "2022",
+      "One upload box for every file type. An Express backend routes each job to the right engine — sharp for images, ffmpeg for audio and video, LibreOffice for documents — behind a React and Vite front end.",
+    year: "2025",
     role: "Full-stack",
-    stack: ["Next.js", "MDX", "Algolia"],
-    live: "#",
-    repo: "#",
+    stack: ["React", "Vite", "Express", "FFmpeg"],
+    repo: "https://github.com/Awomoon/MoonConvert",
+  },
+  {
+    slug: "notes-flutter",
+    title: "Notes",
+    blurb:
+      "A Flutter notes app with local persistence through sqflite. Create, edit and delete notes that survive a restart, with the database layer kept behind a single module and no cloud dependency.",
+    year: "2025",
+    role: "Mobile",
+    stack: ["Flutter", "Dart", "sqflite"],
+    repo: "https://github.com/Awomoon/Note-app-Flutter-",
+  },
+  {
+    slug: "node-blog",
+    title: "Node Blog",
+    blurb:
+      "A server-rendered blog with full CRUD on Express and MongoDB — EJS templates, Mongoose models, and method-override so plain HTML forms can still issue PUT and DELETE.",
+    year: "2025",
+    role: "Backend",
+    stack: ["Node.js", "Express", "MongoDB", "EJS"],
+    repo: "https://github.com/Awomoon/Node_Blog",
+  },
+  {
+    slug: "weather",
+    title: "Weather",
+    blurb:
+      "A weather lookup built on the OpenWeatherMap API in plain JavaScript — no framework, no build step. Fetch, handle the error states properly, and keep the layout responsive.",
+    year: "2025",
+    role: "Front-end",
+    stack: ["JavaScript", "REST API", "CSS"],
+    repo: "https://github.com/Awomoon/WeatherProject",
   },
 ];
 
-export const experience: Role[] = [
+export const experience: Chapter[] = [
   {
-    company: "Freelance",
-    title: "Independent developer",
-    period: "2023 — now",
+    period: "2026",
+    title: "Building for real users",
     summary:
-      "Product and design-engineering work for startups and studios, mostly in the Next.js / TypeScript world.",
+      "Moved from practice projects to software meant to be used daily by people who are not developers.",
     highlights: [
-      "Shipped 14 production apps across fintech, commerce, and dev tooling",
-      "Rescued three projects from render-blocking bundles above 1.4MB",
-      "Run the front-end architecture review for two long-term clients",
+      "Shipped Shoka, an offline-first POS and inventory tracker for small shops",
+      "Designed a zero-backend architecture around SQLite in WAL mode",
+      "Made soft deletes and denormalised sale history keep past receipts intact",
     ],
   },
   {
-    company: "Northbeam Studio",
-    title: "Senior front-end engineer",
-    period: "2021 — 2023",
+    period: "2025",
+    title: "The full-stack year",
     summary:
-      "Led the front end on flagship client builds and set up the shared component system the whole studio now uses.",
+      "Worked across the whole stack in one run — Next.js on the front, Express and MongoDB behind it, Flutter on mobile.",
     highlights: [
-      "Built the design system consumed by 9 client projects",
-      "Cut average Lighthouse TTI across the portfolio by 46%",
-      "Mentored four juniors through their first production launches",
+      "Built Moon Directory on the Next.js App Router with NextAuth sessions",
+      "Wrote MoonConvert's conversion backend around sharp, ffmpeg and LibreOffice",
+      "Shipped a Flutter notes app backed by local sqflite storage",
     ],
   },
   {
-    company: "Kite & Co.",
-    title: "Web developer",
-    period: "2019 — 2021",
+    period: "2024",
+    title: "Foundations",
     summary:
-      "Agency work — marketing sites, campaign microsites, and a lot of CMS plumbing on tight deadlines.",
+      "Learned the server side first — authentication, templating and databases — before moving up to frameworks.",
     highlights: [
-      "Delivered 25+ sites with a two-person front-end team",
-      "Introduced automated visual regression testing",
-      "Migrated the agency stack from jQuery to React",
+      "Built authentication from scratch with Node.js rather than a library",
+      "Worked through PHP and Laravel alongside the JavaScript track",
+      "Started publishing everything publicly on GitHub",
     ],
   },
 ];
+
+/** Headings for each section, so all page copy lives in this file. */
+export const sections = {
+  work: {
+    eyebrow: "Selected work",
+    title: "Things I've built and still stand behind.",
+    lede: "Mostly solo builds — a point-of-sale app in daily-driver shape, a few full-stack experiments, and the projects I learned the back end on. All of it is public on GitHub.",
+  },
+  stack: {
+    eyebrow: "The stack",
+    title: "Tools I reach for without thinking.",
+    lede: "Flutter first on mobile, React and Next.js on the web, Node and Firebase underneath. The list matters less than knowing when not to add to it.",
+  },
+  path: {
+    eyebrow: "The path",
+    title: "Self-taught, in public.",
+    lede: "No bootcamp and no agency — just a couple of years of shipping, with every step of it visible in the commit history.",
+  },
+} as const;
 
 export const contact = {
   eyebrow: "Contact",
   heading: "Got something you want built?",
-  lede: "I take on a small number of projects at a time. Tell me what you're making and I'll get back to you within a couple of days.",
-  email: "hello@moonport.dev",
+  lede: "I take on freelance projects and collaborations. Tell me what you're making — email works, and WhatsApp is usually faster.",
+  email: "raphaelawoyemi1@gmail.com",
+  whatsapp: "+234 706 836 7213",
+  whatsappHref: "https://wa.me/2347068367213",
+  location: "Ibadan, Oyo State, Nigeria",
 } as const;
 
 export const socials = [
-  { label: "GitHub", href: "https://github.com/awomoon" },
-  { label: "X", href: "https://x.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
-  { label: "Email", href: "mailto:hello@moonport.dev" },
+  { label: "GitHub", href: "https://github.com/Awomoon" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/awoyemi-raphael/" },
+  { label: "X", href: "https://twitter.com/raphaelawoyemi" },
+  { label: "WhatsApp", href: "https://wa.me/2347068367213" },
 ] as const;
 
 export const navLinks = [

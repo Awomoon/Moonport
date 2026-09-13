@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap, scrollToTarget } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
-import { hero, site } from "@/content/site";
+import { hero, heroPanels, site } from "@/content/site";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Counter } from "@/components/ui/Counter";
 import { cn } from "@/lib/utils";
@@ -95,7 +95,7 @@ export function Hero() {
       id="top"
       className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40"
     >
-      <div className="shell grid items-center gap-16 lg:grid-cols-[1.15fr_0.85fr]">
+      <div className="shell grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr]">
         {/* Copy */}
         <div data-hero className="invisible flex flex-col gap-8">
           <span
@@ -109,7 +109,7 @@ export function Hero() {
             {hero.eyebrow}
           </span>
 
-          <h1 className="font-display text-[clamp(2.75rem,8.2vw,6rem)] leading-[0.94] font-semibold tracking-[-0.045em]">
+          <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.96] font-semibold tracking-[-0.045em]">
             {hero.headline.map((line, i) => (
               <span
                 key={line}
@@ -185,16 +185,22 @@ export function Hero() {
               <span className="size-2 rounded-full bg-ember/80" />
               <span className="size-2 rounded-full bg-glow/80" />
               <span className="size-2 rounded-full bg-aurora/80" />
-              <span className="ml-auto font-mono text-[10px] tracking-widest text-faint">
-                SHIP.TSX
+              <span className="ml-auto font-mono text-[10px] tracking-widest text-faint uppercase">
+                {heroPanels.code.filename}
               </span>
             </div>
             <div className="mt-4 space-y-2 font-mono text-[11px] leading-relaxed">
-              <p className="text-plasma">export default function Ship() {`{`}</p>
-              <p className="pl-4 text-haze">
-                return <span className="text-aurora">&lt;Fast /&gt;</span>;
-              </p>
-              <p className="text-plasma">{`}`}</p>
+              {heroPanels.code.lines.map((line) => (
+                <p
+                  key={line.text}
+                  className={cn(
+                    line.tone === "accent" ? "text-plasma" : "text-aurora",
+                    line.indent && "pl-4",
+                  )}
+                >
+                  {line.text}
+                </p>
+              ))}
             </div>
           </div>
 
@@ -202,12 +208,14 @@ export function Hero() {
             data-hero-panel
             className="glass absolute top-44 left-0 w-56 rounded-3xl p-5"
           >
-            <p className="eyebrow">Lighthouse</p>
+            <p className="eyebrow">{heroPanels.metric.label}</p>
             <div className="mt-4 flex items-end gap-3">
               <span className="font-display text-5xl leading-none font-semibold text-aurora">
-                100
+                {heroPanels.metric.value}
               </span>
-              <span className="pb-1 text-xs text-faint">Performance</span>
+              <span className="pb-1 text-xs text-faint">
+                {heroPanels.metric.caption}
+              </span>
             </div>
             <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/8">
               <div className="h-full w-full rounded-full bg-linear-90 from-aurora to-glow" />
@@ -218,10 +226,9 @@ export function Hero() {
             data-hero-panel
             className="glass absolute right-0 bottom-6 w-60 rounded-3xl p-5"
           >
-            <p className="eyebrow">Currently</p>
+            <p className="eyebrow">{heroPanels.note.label}</p>
             <p className="mt-3 text-sm leading-relaxed text-mist">
-              Building a real-time collaboration layer — CRDTs, presence, and
-              zero perceived latency.
+              {heroPanels.note.text}
             </p>
           </div>
 

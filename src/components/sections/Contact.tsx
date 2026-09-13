@@ -72,13 +72,22 @@ export function Contact() {
                 </svg>
               </MagneticButton>
 
-              <button
-                type="button"
-                onClick={copyEmail}
-                className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase transition-colors duration-300 hover:text-aurora"
-              >
-                {copied ? "Copied to clipboard" : "Or copy the address"}
-              </button>
+              <MagneticButton href={contact.whatsappHref} variant="ghost">
+                WhatsApp {contact.whatsapp}
+              </MagneticButton>
+
+              <div className="flex flex-col gap-2">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  className="text-left font-mono text-[11px] tracking-[0.2em] text-faint uppercase transition-colors duration-300 hover:text-aurora"
+                >
+                  {copied ? "Copied to clipboard" : "Or copy the address"}
+                </button>
+                <span className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase">
+                  {contact.location}
+                </span>
+              </div>
             </Reveal>
           </div>
 
