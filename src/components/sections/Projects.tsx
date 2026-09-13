@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, type CSSProperties } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
@@ -10,13 +10,40 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { cn, pad } from "@/lib/utils";
 
-/** Deterministic cover gradient so every project reads as part of one set. */
-const COVERS = [
-  "from-plasma/35 via-glow/15 to-transparent",
-  "from-aurora/35 via-plasma/15 to-transparent",
-  "from-ember/30 via-plasma/15 to-transparent",
-  "from-glow/30 via-aurora/15 to-transparent",
+/**
+ * Card covers. Two accent tokens per card bloom from opposite corners over a
+ * dark base, which keeps every cover in the same family while staying
+ * distinct — a single linear ramp to transparent just washed out to grey.
+ */
+const COVER_PAIRS: ReadonlyArray<readonly [string, string]> = [
+  ["--color-aurora", "--color-glow"],
+  ["--color-plasma", "--color-ember"],
+  ["--color-glow", "--color-plasma"],
+  ["--color-ember", "--color-aurora"],
+  ["--color-aurora", "--color-plasma"],
+  ["--color-glow", "--color-ember"],
 ];
+
+function coverStyle(index: number): CSSProperties {
+  const [warm, cool] = COVER_PAIRS[index % COVER_PAIRS.length];
+  // Shift the bloom origins per card so a repeated pair never reads identical.
+  const drift = (index % 3) * 11;
+  const tint = (token: string, pct: number) =>
+    `color-mix(in oklab, var(${token}) ${pct}%, transparent)`;
+
+  return {
+    backgroundImage: [
+      // Main bloom, top-left.
+      `radial-gradient(92% 132% at ${13 + drift}% -8%, ${tint(warm, 66)}, transparent 58%)`,
+      // Counter bloom, upper-right.
+      `radial-gradient(78% 108% at ${89 - drift}% 16%, ${tint(cool, 52)}, transparent 60%)`,
+      // Faint lift from below so the bottom edge doesn't go flat.
+      `radial-gradient(128% 86% at 50% 116%, ${tint(warm, 28)}, transparent 66%)`,
+      // Glass sheen over a dark floor.
+      "linear-gradient(168deg, rgba(255,255,255,0.08), rgba(4,5,10,0.62))",
+    ].join(", "),
+  };
+}
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const featured = Boolean(project.featured);
@@ -48,13 +75,11 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         ) : (
           <>
             <div
-              className={cn(
-                "absolute inset-0 bg-linear-140 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110",
-                COVERS[index % COVERS.length],
-              )}
+              style={coverStyle(index)}
+              className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
             />
             <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
-            <span className="font-display absolute -bottom-6 left-5 text-[7rem] leading-none font-semibold text-white/6 select-none">
+            <span className="font-display absolute -bottom-6 left-5 text-[7rem] leading-none font-semibold text-white/12 select-none">
               {pad(index + 1)}
             </span>
           </>
