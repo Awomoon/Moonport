@@ -252,7 +252,7 @@ export const contact = {
   eyebrow: "Contact",
   heading: "Got something you want built?",
   lede: "I take on freelance projects and collaborations. Tell me what you're making — email works, and WhatsApp is usually faster.",
-  email: "raphaelawoyemi1@gmail.com",
+  email: "raphaelasiwaju1@gmail.com",
   whatsapp: "+234 706 836 7213",
   whatsappHref: "https://wa.me/2347068367213",
   location: "Ibadan, Oyo State, Nigeria",
