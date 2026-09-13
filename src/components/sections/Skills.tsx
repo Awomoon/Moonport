@@ -1,4 +1,4 @@
-import { skills } from "@/content/site";
+import { sections, skills } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Marquee } from "@/components/ui/Marquee";
 import { Reveal } from "@/components/ui/Reveal";
@@ -17,9 +17,9 @@ export function Skills() {
     <section id="stack" className="band">
       <div className="shell">
         <SectionHeading
-          eyebrow="The stack"
-          title="Tools I reach for without thinking."
-          lede="Deep in the TypeScript ecosystem, comfortable anywhere near it. The list matters less than knowing when not to add to it."
+          eyebrow={sections.stack.eyebrow}
+          title={sections.stack.title}
+          lede={sections.stack.lede}
         />
       </div>
 

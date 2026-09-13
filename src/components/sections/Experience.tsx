@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
-import { experience } from "@/content/site";
+import { experience, sections } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { pad } from "@/lib/utils";
 
@@ -72,8 +72,9 @@ export function Experience() {
     <section ref={root} id="path" className="band">
       <div className="shell">
         <SectionHeading
-          eyebrow="The path"
-          title="Where I've been putting the hours."
+          eyebrow={sections.path.eyebrow}
+          title={sections.path.title}
+          lede={sections.path.lede}
         />
 
         <ol data-timeline className="relative mt-14 pl-8 md:mt-20 md:pl-14">
@@ -90,7 +91,7 @@ export function Experience() {
 
           {experience.map((role, i) => (
             <li
-              key={role.company}
+              key={role.period}
               data-role
               className="invisible relative pb-14 last:pb-0"
             >
@@ -108,9 +109,7 @@ export function Experience() {
                   <h3 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
                     {role.title}
                   </h3>
-                  <span className="text-plasma">@</span>
-                  <span className="text-lg text-mist">{role.company}</span>
-                  <span className="ml-auto font-mono text-[11px] tracking-widest text-faint uppercase">
+                  <span className="ml-auto font-mono text-[11px] tracking-widest text-aurora uppercase">
                     {role.period}
                   </span>
                 </div>

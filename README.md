@@ -1,6 +1,6 @@
-# Moonport
+# Moontech
 
-A personal portfolio built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**
+The portfolio of **Awoyemi Raphael** (Moontech) — Ibadan, Nigeria. Built with **Next.js 16 (App Router)**, **TypeScript**, **Tailwind CSS v4**
 and **GSAP** — dark, glassy, and animated end to end.
 
 ---
@@ -16,12 +16,16 @@ npm run lint     # eslint
 
 ## Make it yours
 
-Everything you'd want to change lives in **`src/content/site.ts`** — name, headline, stats,
-projects, experience, skills, socials and contact details. No component edits required.
+Every word on the page lives in **`src/content/site.ts`** — name, headline, hero panels,
+stats, section headings, projects, timeline, skills, socials and contact details. No
+component edits required.
 
 ```ts
-export const site = { name: "Moonport", url: "https://moonport.dev", ... };
+export const site = { name: "Moontech", url: "https://awomoon.github.io/Moonport", ... };
+export const heroPanels = { code, metric, note };   // the floating glass cards
+export const sections = { work, stack, path };      // section eyebrows + headings
 export const projects: Project[] = [ ... ];
+export const experience: Chapter[] = [ ... ];       // build chapters, not employers
 ```
 
 Project images are optional. Drop a file in `public/` and set `image: "/work/helios.png"` on
