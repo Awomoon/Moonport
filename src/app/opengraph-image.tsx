@@ -4,6 +4,8 @@ import { site, hero } from "@/content/site";
 export const alt = site.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+// Required so the card can be baked out during a static export.
+export const dynamic = "force-static";
 
 /** Social card, generated at build time so it always matches the content file. */
 export default function OpengraphImage() {
