@@ -35,6 +35,7 @@ export type SkillGroup = {
 
 export const site = {
   name: "Moontech",
+  fullName: "Ayotunde Raphael Awoyemi",
   handle: "@awomoon",
   title: "Moontech — Awoyemi Raphael, full-stack developer",
   description:
@@ -82,7 +83,7 @@ export const about = {
   eyebrow: "About",
   heading: "Ibadan-based, Flutter-first, and stubborn about apps that survive a dead signal.",
   paragraphs: [
-    "I build cross-platform products — Flutter and Dart on mobile, React and Next.js on the web, Node and Firebase behind both. Most of what I ship is aimed at people on cheap Android phones and unreliable connections, which turns offline-first from a nice-to-have into the actual design constraint.",
+    `I'm ${site.fullName}, and I build cross-platform products under the name Moontech — Flutter and Dart on mobile, React and Next.js on the web, Node and Firebase behind both. Most of what I ship is aimed at people on cheap Android phones and unreliable connections, which turns offline-first from a nice-to-have into the actual design constraint.`,
     "That shows up in the work. Shoka, my point-of-sale app, has no server at all: every sale is a single SQLite transaction that rolls back rather than let stock go negative. I care about the same things on the web — clean, maintainable code, a user-first interface, and no spinner where a local read would do.",
   ],
   nowPlaying: [
