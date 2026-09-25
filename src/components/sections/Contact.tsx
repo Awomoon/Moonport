@@ -4,7 +4,7 @@ import { useState } from "react";
 import { contact, socials } from "@/content/site";
 import { SplitHeading } from "@/components/ui/SplitHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { DeckCard } from "@/components/ui/DeckCard";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 
 export function Contact() {
@@ -24,7 +24,7 @@ export function Contact() {
   return (
     <section id="contact" className="band">
       <div className="shell">
-        <GlassCard
+        <DeckCard
           tilt={0}
           className="overflow-hidden rounded-[2rem] px-6 py-14 md:px-14 md:py-20"
         >
@@ -38,7 +38,7 @@ export function Contact() {
             <div className="flex max-w-2xl flex-col gap-6">
               <Reveal from="up">
                 <span className="eyebrow">
-                  <span className="size-1.5 rounded-full bg-ember shadow-[0_0_10px_var(--color-ember)]" />
+                  <span className="size-1.5 rounded-full bg-signal shadow-[0_0_10px_var(--color-signal)]" />
                   {contact.eyebrow}
                 </span>
               </Reveal>
@@ -80,12 +80,15 @@ export function Contact() {
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="text-left font-mono text-[11px] tracking-[0.2em] text-faint uppercase transition-colors duration-300 hover:text-aurora"
+                  className="text-left font-mono text-[11px] tracking-[0.2em] text-faint uppercase transition-colors duration-300 hover:text-gold"
                 >
                   {copied ? "Copied to clipboard" : "Or copy the address"}
                 </button>
                 <span className="font-mono text-[11px] tracking-[0.2em] text-faint uppercase">
                   {contact.location}
+                </span>
+                <span className="font-mono text-[11px] tracking-[0.2em] text-gold uppercase">
+                  {contact.signOff}
                 </span>
               </div>
             </Reveal>
@@ -107,7 +110,7 @@ export function Contact() {
                 <span className="text-sm text-mist">{social.label}</span>
                 <svg
                   viewBox="0 0 16 16"
-                  className="size-3.5 text-faint transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-aurora"
+                  className="size-3.5 text-faint transition-all duration-500 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="1.75"
@@ -118,7 +121,7 @@ export function Contact() {
               </a>
             ))}
           </Reveal>
-        </GlassCard>
+        </DeckCard>
       </div>
     </section>
   );

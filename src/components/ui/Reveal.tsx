@@ -54,8 +54,9 @@ export function Reveal({
 
     // A sideways start offset sticks out past a narrow viewport before the
     // tween runs, which makes mobile browsers widen the layout viewport.
-    // Below md, horizontal reveals drift up instead.
-    const narrow = window.matchMedia("(width < 48rem)").matches;
+    // The layout is single-column below lg, so horizontal reveals drift up there
+    // instead — at exactly 768px the old md check still let them overflow.
+    const narrow = window.matchMedia("(width < 64rem)").matches;
     const direction =
       narrow && (from === "left" || from === "right") ? "up" : from;
 

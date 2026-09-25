@@ -16,7 +16,7 @@ type MagneticButtonProps = {
 };
 
 /**
- * A glass pill that leans toward the pointer and settles back with elastic
+ * A deck pill that leans toward the pointer and settles back with elastic
  * easing. Falls back to a plain link when the pointer is coarse.
  */
 export function MagneticButton({
@@ -78,12 +78,12 @@ export function MagneticButton({
   }, [strength]);
 
   const base =
-    "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-tight transition-colors duration-500 glass-rim will-change-transform";
+    "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full px-7 py-3.5 text-sm font-medium tracking-tight transition-colors duration-500 rim will-change-transform";
 
   const styles =
     variant === "solid"
-      ? "text-void bg-linear-100 from-aurora via-glow to-plasma shadow-[0_18px_50px_-18px_rgba(94,234,212,0.75)] hover:shadow-[0_22px_60px_-16px_rgba(167,139,250,0.85)]"
-      : "glass text-mist hover:text-white";
+      ? "text-void bg-linear-100 from-gold via-tide to-sea shadow-[0_18px_50px_-18px_rgba(94,234,212,0.75)] hover:shadow-[0_22px_60px_-16px_rgba(167,139,250,0.85)]"
+      : "deck text-mist hover:text-white";
 
   const isAnchor = href.startsWith("#");
 

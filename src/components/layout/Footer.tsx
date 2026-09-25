@@ -1,4 +1,5 @@
-import { site, socials } from "@/content/site";
+import { contact, site, socials } from "@/content/site";
+import { Emblem } from "@/components/ui/Emblem";
 import { Marquee } from "@/components/ui/Marquee";
 
 export function Footer() {
@@ -17,10 +18,23 @@ export function Footer() {
         ))}
       </Marquee>
 
-      <div className="shell flex flex-col gap-6 pb-10 md:flex-row md:items-center md:justify-between">
-        <p className="font-mono text-xs tracking-wider text-faint uppercase">
-          © {year} {site.name}. Built with Next.js, Tailwind &amp; GSAP.
-        </p>
+      <div className="shell rope mb-10" />
+
+      <div className="shell flex flex-col gap-8 pb-10 md:flex-row md:items-end md:justify-between">
+        <div className="flex items-start gap-4">
+          <Emblem className="mt-0.5 size-9 text-gold" />
+          <div className="flex flex-col gap-1">
+            <span className="font-display text-base font-semibold tracking-tight">
+              {site.name}
+            </span>
+            <span className="font-mono text-[10px] tracking-[0.24em] text-gold uppercase">
+              {site.alias}
+            </span>
+            <p className="mt-2 font-mono text-[11px] tracking-wider text-faint uppercase">
+              {contact.signOff} · © {year} · Next.js, Tailwind &amp; GSAP
+            </p>
+          </div>
+        </div>
 
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
           {socials.map((social) => (
@@ -32,7 +46,7 @@ export function Footer() {
                 className="group relative text-sm text-haze transition-colors duration-300 hover:text-mist"
               >
                 {social.label}
-                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-aurora transition-all duration-500 group-hover:w-full" />
+                <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-gold transition-all duration-500 group-hover:w-full" />
               </a>
             </li>
           ))}

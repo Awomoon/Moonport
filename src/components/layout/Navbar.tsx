@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { ScrollTrigger, gsap, registerGsap, scrollToTarget } from "@/lib/gsap";
 import { prefersReducedMotion } from "@/lib/motion";
 import { contact, navLinks, site } from "@/content/site";
+import { Emblem } from "@/components/ui/Emblem";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -48,8 +49,8 @@ export function Navbar() {
             duration: reduced ? 0 : 0.5,
             overwrite: true,
           });
-          shell.classList.toggle("glass-solid", self.isActive);
-          shell.classList.toggle("glass", !self.isActive);
+          shell.classList.toggle("deck-solid", self.isActive);
+          shell.classList.toggle("deck", !self.isActive);
         },
       });
 
@@ -130,19 +131,22 @@ export function Navbar() {
         <div className="shell pt-3 md:pt-5">
           <div
             data-nav-shell
-            className="glass flex items-center justify-between gap-4 rounded-full py-4 pr-2 pl-5 md:pl-6"
+            className="deck flex items-center justify-between gap-4 rounded-full py-4 pr-2 pl-5 md:pl-6"
           >
             <button
               type="button"
               onClick={() => go("#top")}
-              className="group flex items-center gap-2.5 text-sm font-medium tracking-tight"
+              className="group flex items-center gap-3 text-left"
+              aria-label={`${site.name} — ${site.alias}, back to top`}
             >
-              <span className="relative flex size-2.5">
-                <span className="absolute inset-0 animate-[pulse-ring_2.4s_ease-out_infinite] rounded-full bg-aurora" />
-                <span className="relative size-2.5 rounded-full bg-aurora" />
-              </span>
-              <span className="transition-colors duration-300 group-hover:text-white">
-                {site.name}
+              <Emblem className="size-7 text-gold transition-transform duration-500 group-hover:rotate-[8deg]" />
+              <span className="flex flex-col leading-none">
+                <span className="font-display text-sm font-semibold tracking-tight transition-colors duration-300 group-hover:text-white">
+                  {site.name}
+                </span>
+                <span className="mt-1 hidden font-mono text-[9px] tracking-[0.2em] whitespace-nowrap text-faint uppercase lg:block">
+                  {site.alias}
+                </span>
               </span>
             </button>
 
@@ -171,9 +175,9 @@ export function Navbar() {
               <button
                 type="button"
                 onClick={() => go("#contact")}
-                className="hidden rounded-full bg-linear-100 from-aurora to-plasma px-5 py-2.5 text-sm font-medium text-void transition-transform duration-500 hover:scale-[1.04] md:inline-flex"
+                className="hidden rounded-full bg-linear-100 from-gold to-sea px-5 py-2.5 text-sm font-medium whitespace-nowrap text-void transition-transform duration-500 hover:scale-[1.04] md:inline-flex"
               >
-                Let&rsquo;s talk
+                Signal me
               </button>
 
               <button
@@ -232,7 +236,7 @@ export function Navbar() {
         <a
           data-menu-item
           href={`mailto:${contact.email}`}
-          className="mt-8 inline-flex items-center justify-between rounded-full bg-linear-100 from-aurora to-plasma px-6 py-4 text-sm font-medium text-void"
+          className="mt-8 inline-flex items-center justify-between rounded-full bg-linear-100 from-gold to-sea px-6 py-4 text-sm font-medium text-void"
         >
           {contact.email}
           <svg

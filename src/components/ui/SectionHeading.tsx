@@ -27,7 +27,7 @@ export function SectionHeading({
     >
       <Reveal from="up">
         <span className="eyebrow">
-          <span className="size-1.5 rounded-full bg-aurora shadow-[0_0_10px_var(--color-aurora)]" />
+          <span className="size-1.5 rounded-full bg-gold shadow-[0_0_10px_var(--color-gold)]" />
           {eyebrow}
         </span>
       </Reveal>

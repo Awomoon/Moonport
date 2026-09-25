@@ -4,7 +4,7 @@ import "./globals.css";
 
 import { site } from "@/content/site";
 import { MotionProvider } from "@/components/providers/MotionProvider";
-import { LiquidBackground } from "@/components/ui/LiquidBackground";
+import { OceanBackground } from "@/components/ui/OceanBackground";
 import { GooFilter } from "@/components/ui/GooFilter";
 import { Cursor } from "@/components/ui/Cursor";
 import { Preloader } from "@/components/ui/Preloader";
@@ -80,7 +80,7 @@ export default function RootLayout({
 
         {/* Fixed chrome — must stay outside the smooth-scroll wrapper */}
         <GooFilter />
-        <LiquidBackground />
+        <OceanBackground />
         <ScrollProgress />
         <Preloader />
         <Cursor />

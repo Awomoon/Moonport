@@ -5,7 +5,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 
 /**
- * Two-part cursor: a crisp dot that tracks exactly, and a soft glass bubble
+ * Two-part cursor: a crisp dot that tracks exactly, and a soft deck bubble
  * that lags behind and swells over interactive elements. Pointer-fine only.
  */
 export function Cursor() {
@@ -87,7 +87,7 @@ export function Cursor() {
       />
       <div
         ref={dot}
-        className="absolute top-0 left-0 size-1.5 rounded-full bg-aurora will-change-transform"
+        className="absolute top-0 left-0 size-1.5 rounded-full bg-gold will-change-transform"
       />
     </div>
   );

@@ -5,8 +5,8 @@ import { Reveal } from "@/components/ui/Reveal";
 
 function Chip({ label }: { label: string }) {
   return (
-    <span className="glass mx-2 inline-flex items-center gap-2.5 rounded-full px-5 py-3 text-sm whitespace-nowrap text-mist">
-      <span className="size-1.5 rounded-full bg-linear-90 from-aurora to-plasma" />
+    <span className="deck mx-2 inline-flex items-center gap-2.5 rounded-full px-5 py-3 text-sm whitespace-nowrap text-mist">
+      <span className="size-1.5 rounded-full bg-linear-90 from-gold to-sea" />
       {label}
     </span>
   );
@@ -37,11 +37,11 @@ export function Skills() {
         <Reveal
           from="up"
           stagger={0.12}
-          className="grid gap-4 border-t border-white/8 pt-10 md:grid-cols-3"
+          className="grid gap-4 border-t border-white/8 pt-10 sm:grid-cols-2 lg:grid-cols-4"
         >
           {skills.map((group) => (
             <div key={group.label} className="flex flex-col gap-3">
-              <h3 className="font-mono text-[11px] tracking-[0.2em] text-aurora uppercase">
+              <h3 className="font-mono text-[11px] tracking-[0.2em] text-gold uppercase">
                 {group.label}
               </h3>
               <p className="text-sm leading-relaxed text-haze">

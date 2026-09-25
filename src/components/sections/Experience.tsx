@@ -42,7 +42,7 @@ export function Experience() {
       );
 
       // Same reason as Reveal: no sideways offset on narrow screens.
-      const slide = window.matchMedia("(width < 48rem)").matches ? 0 : 44;
+      const slide = window.matchMedia("(width < 64rem)").matches ? 0 : 44;
 
       gsap.utils.toArray<HTMLElement>("[data-role]").forEach((role) => {
         gsap.set(role, { visibility: "visible" });
@@ -79,14 +79,16 @@ export function Experience() {
 
         <ol data-timeline className="relative mt-14 pl-8 md:mt-20 md:pl-14">
           {/* Spine */}
+          {/* Unsailed route: dashed, the way a plotted course is drawn */}
           <span
             aria-hidden
-            className="absolute top-2 bottom-2 left-[3px] w-px bg-white/8 md:left-[23px]"
+            className="absolute top-2 bottom-2 left-[3px] w-px [background-image:repeating-linear-gradient(to_bottom,rgba(231,218,187,0.28)_0_6px,transparent_6px_14px)] md:left-[23px]"
           />
+          {/* Sailed route: fills in as you scroll */}
           <span
             aria-hidden
             data-spine
-            className="absolute top-2 bottom-2 left-[3px] w-px bg-linear-180 from-aurora via-plasma to-transparent md:left-[23px]"
+            className="absolute top-2 bottom-2 left-[3px] w-px bg-linear-180 from-gold via-tide to-transparent md:left-[23px]"
           />
 
           {experience.map((role, i) => (
@@ -95,11 +97,14 @@ export function Experience() {
               data-role
               className="invisible relative pb-14 last:pb-0"
             >
+              {/* Waypoint */}
               <span
                 data-node
                 aria-hidden
-                className="absolute top-1.5 -left-8 size-[7px] rounded-full bg-aurora shadow-[0_0_14px_var(--color-aurora)] md:-left-14 md:translate-x-[17px]"
-              />
+                className="absolute top-0.5 -left-[38px] grid size-[18px] place-items-center rounded-full border border-gold/45 bg-void md:-left-[62px] md:translate-x-[17px]"
+              >
+                <span className="size-[6px] rotate-45 bg-gold shadow-[0_0_12px_var(--color-gold)]" />
+              </span>
 
               <div className="flex max-w-3xl flex-col gap-4">
                 <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
@@ -109,7 +114,7 @@ export function Experience() {
                   <h3 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">
                     {role.title}
                   </h3>
-                  <span className="ml-auto font-mono text-[11px] tracking-widest text-aurora uppercase">
+                  <span className="ml-auto rounded-full border border-gold/25 bg-gold/8 px-2.5 py-1 font-mono text-[10px] tracking-widest text-gold uppercase">
                     {role.period}
                   </span>
                 </div>
@@ -118,7 +123,7 @@ export function Experience() {
                   {role.summary}
                 </p>
 
-                <ul className="glass mt-1 flex max-w-2xl flex-col gap-3 rounded-2xl p-5">
+                <ul className="deck mt-1 flex max-w-2xl flex-col gap-3 rounded-2xl p-5">
                   {role.highlights.map((highlight) => (
                     <li
                       key={highlight}
@@ -126,7 +131,7 @@ export function Experience() {
                     >
                       <svg
                         viewBox="0 0 16 16"
-                        className="mt-0.5 size-3.5 shrink-0 text-aurora"
+                        className="mt-0.5 size-3.5 shrink-0 text-gold"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"

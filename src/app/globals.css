@@ -1,26 +1,35 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------ */
-/*  Design tokens — "dark liquid glass"                                */
+/*  Moontech — The Dev Pirate                                          */
+/*  Midnight ocean + nautical chart + modern developer dashboard.      */
 /* ------------------------------------------------------------------ */
 
 @theme {
-  /* Surfaces */
-  --color-void: #04050a;
-  --color-abyss: #070912;
-  --color-ink: #0b0e1a;
-  --color-slate-glass: #121627;
+  /* Surfaces — deep night water */
+  --color-void: #0b0d10;
+  --color-abyss: #0f141b;
+  --color-ink: #151c26;
+  --color-hull: #1b2530;
 
-  /* Text */
-  --color-mist: #e9edfb;
-  --color-haze: #a3abc9;
-  --color-faint: #6b7392;
+  /* Text — warm off-white so it reads as lamplight, not screen glare */
+  --color-mist: #efeae0;
+  --color-haze: #9aa7b6;
+  --color-faint: #67717f;
 
-  /* Aurora accents */
-  --color-aurora: #5eead4;
-  --color-plasma: #a78bfa;
-  --color-ember: #f472b6;
-  --color-glow: #38bdf8;
+  /* Sea */
+  --color-sea: #1e5375;
+  --color-tide: #2f8079;
+
+  /* Treasure — used sparingly, only where something matters */
+  --color-gold: #d6a93c;
+  --color-brass: #8d6b25;
+
+  /* Chart paper */
+  --color-parchment: #e7dabb;
+
+  /* Restrained warning red — a signal flag, never decoration */
+  --color-signal: #b34b33;
 
   /* Type */
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
@@ -32,9 +41,9 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
   /* Elevation */
-  --shadow-glass: 0 1px 0 0 rgb(255 255 255 / 0.06) inset,
-    0 -1px 0 0 rgb(0 0 0 / 0.4) inset, 0 24px 60px -24px rgb(0 0 0 / 0.85);
-  --shadow-bloom: 0 0 40px -8px color-mix(in oklab, var(--color-plasma) 55%, transparent);
+  --shadow-deck: 0 1px 0 0 rgb(255 255 255 / 0.05) inset,
+    0 -1px 0 0 rgb(0 0 0 / 0.45) inset, 0 24px 60px -24px rgb(0 0 0 / 0.9);
+  --shadow-lamp: 0 0 40px -8px color-mix(in oklab, var(--color-gold) 45%, transparent);
 
   /* Layout */
   --breakpoint-3xl: 112rem;
@@ -85,11 +94,10 @@
   }
 
   ::selection {
-    background: color-mix(in oklab, var(--color-plasma) 45%, transparent);
+    background: color-mix(in oklab, var(--color-gold) 40%, transparent);
     color: #fff;
   }
 
-  /* Scrollbar */
   ::-webkit-scrollbar {
     width: 10px;
   }
@@ -99,11 +107,11 @@
   ::-webkit-scrollbar-thumb {
     border-radius: 999px;
     border: 3px solid var(--color-void);
-    background: color-mix(in oklab, var(--color-plasma) 60%, var(--color-ink));
+    background: color-mix(in oklab, var(--color-sea) 70%, var(--color-gold));
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-aurora);
+    outline: 2px solid var(--color-gold);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -119,36 +127,43 @@
 /*  Utilities                                                          */
 /* ------------------------------------------------------------------ */
 
-/* Frosted panel: layered gradient + blur + specular rim */
-@utility glass {
+/* Deck panel: the ship's own plating — cold steel over deep water. */
+@utility deck {
   position: relative;
   background-image: linear-gradient(
-    145deg,
-    rgb(255 255 255 / 0.075) 0%,
-    rgb(255 255 255 / 0.025) 38%,
-    rgb(255 255 255 / 0.05) 100%
+    155deg,
+    rgb(255 255 255 / 0.07) 0%,
+    rgb(255 255 255 / 0.02) 42%,
+    rgb(255 255 255 / 0.045) 100%
   );
-  background-color: rgb(10 12 22 / 0.55);
-  backdrop-filter: blur(22px) saturate(165%);
-  -webkit-backdrop-filter: blur(22px) saturate(165%);
+  background-color: rgb(14 19 26 / 0.62);
+  backdrop-filter: blur(20px) saturate(135%);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
   border: 1px solid rgb(255 255 255 / 0.09);
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-deck);
 }
 
-/* Heavier, more opaque variant for nav / overlays */
-@utility glass-solid {
-  background-color: rgb(7 9 18 / 0.82);
-  backdrop-filter: blur(28px) saturate(180%);
-  -webkit-backdrop-filter: blur(28px) saturate(180%);
+/* Heavier variant for nav and overlays. */
+@utility deck-solid {
+  background-color: rgb(11 13 16 / 0.86);
+  backdrop-filter: blur(26px) saturate(150%);
+  -webkit-backdrop-filter: blur(26px) saturate(150%);
   border: 1px solid rgb(255 255 255 / 0.1);
-  box-shadow: var(--shadow-glass);
+  box-shadow: var(--shadow-deck);
 }
 
-/* Animated conic gradient ring used on hover for cards & buttons */
-/* Hover ring: a light source travelling around the border.
-   `--rim-a` / `--rim-b` let each card tint its own ring; they fall back to the
-   house accents so buttons and one-off panels need set nothing. */
-@utility glass-rim {
+/* Aged chart paper, for the log entries. Kept rare so it stays special. */
+@utility parchment {
+  background-color: color-mix(in oklab, var(--color-parchment) 14%, var(--color-ink));
+  border: 1px solid color-mix(in oklab, var(--color-parchment) 28%, transparent);
+  box-shadow:
+    0 1px 0 0 color-mix(in oklab, var(--color-parchment) 12%, transparent) inset,
+    0 24px 60px -30px rgb(0 0 0 / 0.9);
+}
+
+/* Lantern ring: a light travelling the border on hover.
+   `--rim-a` / `--rim-b` let a card tint its own ring. */
+@utility rim {
   &::after {
     content: "";
     position: absolute;
@@ -158,19 +173,16 @@
     background: conic-gradient(
       from var(--rim-angle, 0deg),
       transparent 0deg,
-      color-mix(in oklab, var(--rim-a, var(--color-aurora)) 95%, transparent)
-        40deg,
-      color-mix(in oklab, var(--rim-b, var(--color-plasma)) 100%, transparent)
-        95deg,
-      color-mix(in oklab, var(--rim-a, var(--color-aurora)) 65%, transparent)
-        150deg,
+      color-mix(in oklab, var(--rim-a, var(--color-gold)) 95%, transparent) 40deg,
+      color-mix(in oklab, var(--rim-b, var(--color-tide)) 100%, transparent) 95deg,
+      color-mix(in oklab, var(--rim-a, var(--color-gold)) 60%, transparent) 150deg,
       transparent 215deg,
       transparent 360deg
     );
-    /* Ring cut-out. The prefixed shorthand MUST come before the standard
-       `mask-composite`: `-webkit-mask` is an alias of `mask` in modern
-       Chromium, so declaring it afterwards resets the composite back to
-       `add` and the conic fills the whole card instead of just its border. */
+    /* The prefixed shorthand MUST come before the standard `mask-composite`:
+       `-webkit-mask` is an alias of `mask` in modern Chromium, so declaring it
+       afterwards resets the composite to `add` and the conic fills the whole
+       element instead of just its border. */
     -webkit-mask:
       linear-gradient(#000 0 0) content-box,
       linear-gradient(#000 0 0);
@@ -184,8 +196,6 @@
     pointer-events: none;
   }
 
-  /* A soft bloom just outside the ring, so it reads as light rather than a
-     drawn line. Sits behind the card's own content. */
   &::before {
     content: "";
     position: absolute;
@@ -194,17 +204,14 @@
     opacity: 0;
     transition: opacity 0.5s var(--ease-liquid);
     box-shadow:
-      0 0 28px -6px
-        color-mix(in oklab, var(--rim-b, var(--color-plasma)) 55%, transparent),
-      0 0 70px -18px
-        color-mix(in oklab, var(--rim-a, var(--color-aurora)) 45%, transparent);
+      0 0 26px -8px color-mix(in oklab, var(--rim-b, var(--color-tide)) 50%, transparent),
+      0 0 64px -20px color-mix(in oklab, var(--rim-a, var(--color-gold)) 40%, transparent);
     pointer-events: none;
   }
 
   &:hover::after,
   &:focus-within::after {
     opacity: 1;
-    /* The angle is a registered @property, so this interpolates smoothly. */
     animation: rim-spin 5s linear infinite;
   }
 
@@ -214,14 +221,15 @@
   }
 }
 
-/* Gradient text */
-@utility text-aurora {
+/* Treasure text: brass leaf, not neon. */
+@utility text-treasure {
   background-image: linear-gradient(
     100deg,
-    var(--color-aurora) 0%,
-    var(--color-glow) 30%,
-    var(--color-plasma) 62%,
-    var(--color-ember) 100%
+    var(--color-brass) 0%,
+    var(--color-gold) 26%,
+    #f3dd9a 46%,
+    var(--color-gold) 66%,
+    var(--color-brass) 100%
   );
   background-size: 220% 100%;
   -webkit-background-clip: text;
@@ -255,7 +263,7 @@
   }
 }
 
-/* Small uppercase eyebrow label */
+/* Chart annotation: small mono caps, the way a nautical chart labels things. */
 @utility eyebrow {
   display: inline-flex;
   align-items: center;
@@ -268,20 +276,34 @@
   color: var(--color-haze);
 }
 
-/* Metaball blending for the liquid blobs */
+/* Latitude/longitude style marker */
+@utility coord {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in oklab, var(--color-gold) 55%, var(--color-faint));
+}
+
+/* Metaball blending for the background swell */
 @utility goo {
   filter: url(#liquid-goo);
 }
 
-/* Masks a block so it fades out at the horizontal edges */
+/* Fades a scrolling row out at both edges */
 @utility edge-fade {
-  mask-image: linear-gradient(
-    90deg,
-    transparent,
-    #000 8%,
-    #000 92%,
-    transparent
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+/* Rope: a braided hairline divider */
+@utility rope {
+  height: 3px;
+  background-image: repeating-linear-gradient(
+    115deg,
+    color-mix(in oklab, var(--color-brass) 55%, transparent) 0 4px,
+    transparent 4px 9px
   );
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
 }
 
 /* ------------------------------------------------------------------ */
@@ -306,7 +328,7 @@
   }
 }
 
-@keyframes aurora-pan {
+@keyframes sheen-pan {
   50% {
     background-position: 100% 50%;
   }
@@ -323,12 +345,33 @@
   }
 }
 
-.animate-rim {
-  animation: rim-spin 6s linear infinite;
+/* Gentle sea bob for floating chrome */
+@keyframes swell {
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
-.animate-aurora {
-  animation: aurora-pan 9s var(--ease-liquid) infinite;
+@keyframes compass-drift {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+}
+
+.animate-sheen {
+  animation: sheen-pan 9s var(--ease-liquid) infinite;
+}
+
+.animate-swell {
+  animation: swell 7s ease-in-out infinite;
+}
+
+.animate-compass {
+  animation: compass-drift 12s ease-in-out infinite;
 }
 
 /* ------------------------------------------------------------------ */

@@ -5,6 +5,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap, scrollToTarget } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
 import { hero, heroPanels, site } from "@/content/site";
+import { Emblem } from "@/components/ui/Emblem";
 import { MagneticButton } from "@/components/ui/MagneticButton";
 import { Counter } from "@/components/ui/Counter";
 import { cn } from "@/lib/utils";
@@ -93,23 +94,30 @@ export function Hero() {
     <section
       ref={root}
       id="top"
-      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-32 pb-20 md:pt-40"
+      className="relative flex min-h-svh flex-col justify-center overflow-hidden pt-28 pb-14 md:pt-32"
     >
-      <div className="shell grid items-center gap-16 lg:grid-cols-[1.2fr_0.8fr]">
+      <div className="shell grid items-center gap-12 lg:grid-cols-[1.2fr_0.8fr]">
         {/* Copy */}
-        <div data-hero className="invisible flex flex-col gap-8">
-          <span
-            data-hero-eyebrow
-            className="eyebrow w-fit rounded-full border border-white/10 bg-white/4 px-3.5 py-2 backdrop-blur-sm"
-          >
-            <span className="relative flex size-1.5">
-              <span className="absolute inset-0 animate-[pulse-ring_2.4s_ease-out_infinite] rounded-full bg-aurora" />
-              <span className="relative size-1.5 rounded-full bg-aurora" />
-            </span>
-            {hero.eyebrow}
-          </span>
+        <div data-hero className="invisible flex flex-col gap-6">
+          <div data-hero-eyebrow className="flex flex-col gap-4">
+            {/* Callsign — the ship's name board */}
+            <div className="flex items-center gap-3">
+              <Emblem ring={false} className="size-5 text-gold" />
+              <span className="font-mono text-[11px] tracking-[0.3em] text-gold uppercase">
+                {hero.callsign}
+              </span>
+            </div>
 
-          <h1 className="font-display text-[clamp(2.5rem,7vw,5rem)] leading-[0.96] font-semibold tracking-[-0.045em]">
+            <span className="eyebrow w-fit rounded-full border border-gold/20 bg-gold/5 px-3.5 py-2 backdrop-blur-sm">
+              <span className="relative flex size-1.5">
+                <span className="absolute inset-0 animate-[pulse-ring_2.4s_ease-out_infinite] rounded-full bg-tide" />
+                <span className="relative size-1.5 rounded-full bg-tide" />
+              </span>
+              {hero.eyebrow}
+            </span>
+          </div>
+
+          <h1 className="font-display text-[clamp(2.5rem,min(7vw,8.6vh),5rem)] leading-[0.96] font-semibold tracking-[-0.045em]">
             {hero.headline.map((line, i) => (
               <span
                 key={line}
@@ -120,7 +128,7 @@ export function Hero() {
                   className={cn(
                     "block",
                     i === hero.headline.length - 1 &&
-                      "text-aurora animate-aurora",
+                      "text-treasure animate-sheen",
                   )}
                 >
                   {line}
@@ -156,7 +164,12 @@ export function Hero() {
             </MagneticButton>
           </div>
 
-          <dl className="mt-2 grid max-w-lg grid-cols-3 gap-4 border-t border-white/8 pt-7">
+          <div data-hero-cta className="flex items-center gap-3">
+            <span className="coord">{site.coordinates}</span>
+            <span className="h-px flex-1 bg-linear-90 from-gold/35 to-transparent" />
+          </div>
+
+          <dl className="grid max-w-lg grid-cols-3 gap-4 border-t border-white/8 pt-6">
             {hero.stats.map((stat) => (
               <div key={stat.label} data-hero-stat className="flex flex-col gap-1">
                 <dt className="sr-only">{stat.label}</dt>
@@ -171,7 +184,7 @@ export function Hero() {
           </dl>
         </div>
 
-        {/* Decorative glass stack */}
+        {/* Decorative deck stack */}
         <div
           aria-hidden
           className="relative hidden h-[32rem] lg:block"
@@ -179,12 +192,12 @@ export function Hero() {
         >
           <div
             data-hero-panel
-            className="glass absolute top-4 right-6 w-64 rounded-3xl p-5"
+            className="deck absolute top-4 right-6 w-64 rounded-3xl p-5"
           >
             <div className="flex items-center gap-2">
-              <span className="size-2 rounded-full bg-ember/80" />
-              <span className="size-2 rounded-full bg-glow/80" />
-              <span className="size-2 rounded-full bg-aurora/80" />
+              <span className="size-2 rounded-full bg-signal/80" />
+              <span className="size-2 rounded-full bg-tide/80" />
+              <span className="size-2 rounded-full bg-gold/80" />
               <span className="ml-auto font-mono text-[10px] tracking-widest text-faint uppercase">
                 {heroPanels.code.filename}
               </span>
@@ -194,7 +207,7 @@ export function Hero() {
                 <p
                   key={line.text}
                   className={cn(
-                    line.tone === "accent" ? "text-plasma" : "text-aurora",
+                    line.tone === "accent" ? "text-sea" : "text-gold",
                     line.indent && "pl-4",
                   )}
                 >
@@ -206,11 +219,11 @@ export function Hero() {
 
           <div
             data-hero-panel
-            className="glass absolute top-44 left-0 w-56 rounded-3xl p-5"
+            className="deck absolute top-44 left-0 w-56 rounded-3xl p-5"
           >
             <p className="eyebrow">{heroPanels.metric.label}</p>
             <div className="mt-4 flex items-end gap-3">
-              <span className="font-display text-5xl leading-none font-semibold text-aurora">
+              <span className="font-display text-5xl leading-none font-semibold text-gold">
                 {heroPanels.metric.value}
               </span>
               <span className="pb-1 text-xs text-faint">
@@ -218,13 +231,13 @@ export function Hero() {
               </span>
             </div>
             <div className="mt-4 h-1 w-full overflow-hidden rounded-full bg-white/8">
-              <div className="h-full w-full rounded-full bg-linear-90 from-aurora to-glow" />
+              <div className="h-full w-full rounded-full bg-linear-90 from-gold to-tide" />
             </div>
           </div>
 
           <div
             data-hero-panel
-            className="glass absolute right-0 bottom-6 w-60 rounded-3xl p-5"
+            className="deck absolute right-0 bottom-6 w-60 rounded-3xl p-5"
           >
             <p className="eyebrow">{heroPanels.note.label}</p>
             <p className="mt-3 text-sm leading-relaxed text-mist">
@@ -241,14 +254,14 @@ export function Hero() {
         type="button"
         data-hero-cue
         onClick={() => scrollToTarget("#work")}
-        className="shell invisible mt-16 flex items-center gap-3 text-left md:mt-20"
+        className="shell invisible mt-10 flex items-center gap-3 text-left md:mt-14"
         data-hero
       >
         <span className="relative flex h-12 w-7 items-start justify-center rounded-full border border-white/15 pt-2">
-          <span className="size-1 animate-bounce rounded-full bg-aurora" />
+          <span className="size-1 animate-bounce rounded-full bg-gold" />
         </span>
         <span className="font-mono text-[11px] tracking-[0.24em] text-faint uppercase">
-          Scroll to explore {site.handle}
+          Set course — {site.homePort}
         </span>
       </button>
     </section>

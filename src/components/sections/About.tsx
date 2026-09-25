@@ -7,7 +7,7 @@ import { prefersReducedMotion } from "@/lib/motion";
 import { about, site } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { DeckCard } from "@/components/ui/DeckCard";
 
 export function About() {
   const root = useRef<HTMLElement>(null);
@@ -83,13 +83,18 @@ export function About() {
         </div>
 
         <Reveal from="left" className="lg:pt-4">
-          <GlassCard className="p-7 md:p-8" tilt={5}>
+          <DeckCard className="parchment overflow-hidden p-7 md:p-8" tilt={5}>
+            {/* Ruled margin, the way a ship's log is lined */}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-y-0 left-4 w-px bg-gold/25 md:left-5"
+            />
             <div className="flex items-center gap-3">
               <span className="relative flex size-2">
-                <span className="absolute inset-0 animate-[pulse-ring_2.4s_ease-out_infinite] rounded-full bg-ember" />
-                <span className="relative size-2 rounded-full bg-ember" />
+                <span className="absolute inset-0 animate-[pulse-ring_2.4s_ease-out_infinite] rounded-full bg-gold" />
+                <span className="relative size-2 rounded-full bg-gold" />
               </span>
-              <span className="eyebrow">Right now</span>
+              <span className="eyebrow text-parchment/80">{about.logLabel}</span>
             </div>
 
             <ul className="mt-6 flex flex-col divide-y divide-white/8">
@@ -98,21 +103,19 @@ export function About() {
                   key={item}
                   className="flex items-start gap-3 py-4 text-sm leading-relaxed text-haze first:pt-0 last:pb-0"
                 >
-                  <span className="mt-1.5 size-1 shrink-0 rounded-full bg-plasma" />
+                  <span className="mt-1.5 size-1 shrink-0 rounded-full bg-gold" />
                   {item}
                 </li>
               ))}
             </ul>
 
             <div className="mt-7 flex items-center justify-between border-t border-white/8 pt-6">
-              <span className="font-mono text-[11px] tracking-widest text-faint uppercase">
-                {site.handle}
-              </span>
-              <span className="font-mono text-[11px] tracking-widest text-aurora uppercase">
+              <span className="coord">{site.coordinates}</span>
+              <span className="font-mono text-[11px] tracking-widest text-gold uppercase">
                 Open to work
               </span>
             </div>
-          </GlassCard>
+          </DeckCard>
         </Reveal>
       </div>
     </section>

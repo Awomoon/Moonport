@@ -5,7 +5,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { getSmoother, gsap, registerGsap } from "@/lib/gsap";
 
 /**
- * Brief entry curtain: a counter runs to 100 while four glass panels slide
+ * Brief entry curtain: a counter runs to 100 while four deck panels slide
  * away. Scrolling is parked until it finishes so the hero animation is not
  * missed. Skipped entirely under reduced motion.
  */
@@ -88,7 +88,7 @@ export function Preloader() {
           <div
             key={i}
             data-curtain
-            className="h-full flex-1 border-r border-white/5 bg-abyss last:border-r-0"
+            className="h-full flex-1 border-r border-gold/8 bg-abyss last:border-r-0"
           />
         ))}
       </div>
@@ -98,7 +98,7 @@ export function Preloader() {
         className="relative z-10 flex w-full items-end justify-between px-6 pb-8 md:px-10 md:pb-10"
       >
         <span className="font-mono text-xs tracking-[0.28em] text-faint uppercase">
-          Loading
+          Weighing anchor
         </span>
         <span
           ref={count}

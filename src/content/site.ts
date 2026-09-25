@@ -35,26 +35,30 @@ export type SkillGroup = {
 
 export const site = {
   name: "Moontech",
-  fullName: "Ayotunde Raphael Awoyemi",
-  /** How he's introduced in short copy. Same name order as fullName. */
-  shortName: "Raphael Awoyemi",
+  /** One name form, used everywhere on the site. */
+  fullName: "Awoyemi Raphael",
+  alias: "The Dev Pirate",
   handle: "@awomoon",
-  title: "Moontech — Ayotunde Raphael Awoyemi, full-stack developer",
+  title: "Moontech — Awoyemi Raphael, The Dev Pirate",
   description:
-    "Ayotunde Raphael Awoyemi (Moontech) — full-stack developer in Ibadan, Nigeria. Flutter, React and Node, with a habit of building things that keep working offline.",
+    "Awoyemi Raphael — Moontech, The Dev Pirate. Full-stack developer in Ibadan, Nigeria. Flutter, React and Node, with a habit of building things that keep working offline.",
   url: "https://awomoon.github.io/Moonport",
   locale: "en_NG",
+  /** Home port. Real coordinates for Ibadan, used as chart annotation. */
+  coordinates: "07°22'39\"N  003°56'49\"E",
+  homePort: "Ibadan · Oyo State · Nigeria",
 } as const;
 
 export const hero = {
   eyebrow: "Open for freelance & collaboration",
+  callsign: "Moontech — The Dev Pirate",
   // Rendered one line per array entry; the last line gets the aurora gradient.
   headline: ["Apps that work", "when the", "network won't"],
-  lede: `I'm ${site.shortName} — a full-stack developer in Ibadan, Nigeria, building mobile and web products with Flutter, React and Firebase. Lately that means software for shops that can't count on the network.`,
-  primaryCta: { label: "See the work", href: "#work" },
-  secondaryCta: { label: "Get in touch", href: "#contact" },
+  lede: `I'm ${site.fullName} — a full-stack developer in Ibadan, Nigeria, building mobile and web products with Flutter, React and Firebase. Lately that means software for shops that can't count on the network.`,
+  primaryCta: { label: "See the treasure", href: "#work" },
+  secondaryCta: { label: "Send a message", href: "#contact" },
   stats: [
-    { value: 1, suffix: "+", label: "Years building" },
+    { value: 1, suffix: "+", label: "Years at sea" },
     { value: 25, suffix: "+", label: "Public repositories" },
     { value: 5, suffix: "", label: "Languages in daily use" },
   ],
@@ -71,23 +75,24 @@ export const heroPanels = {
     ],
   },
   metric: {
-    label: "Shoka",
+    label: "Flagship · Shoka",
     value: "0",
     caption: "Backend servers",
   },
   note: {
-    label: "Currently",
+    label: "Next destination",
     text: "Adding cloud backup, Paystack payments and barcode scanning to Shoka.",
   },
 } as const;
 
 export const about = {
-  eyebrow: "About",
+  eyebrow: "Captain's log",
   heading: "Ibadan-based, Flutter-first, and stubborn about apps that survive a dead signal.",
   paragraphs: [
     `I'm ${site.fullName}, and I build cross-platform products under the name Moontech — Flutter and Dart on mobile, React and Next.js on the web, Node and Firebase behind both. Most of what I ship is aimed at people on cheap Android phones and unreliable connections, which turns offline-first from a nice-to-have into the actual design constraint.`,
     "That shows up in the work. Shoka, my point-of-sale app, has no server at all: every sale is a single SQLite transaction that rolls back rather than let stock go negative. I care about the same things on the web — clean, maintainable code, a user-first interface, and no spinner where a local read would do.",
   ],
+  logLabel: "Current heading",
   nowPlaying: [
     "Deepening advanced Flutter patterns and Firebase architecture",
     "Adding cloud backup, Paystack and barcode scanning to Shoka",
@@ -198,6 +203,17 @@ export const projects: Project[] = [
 
 export const experience: Chapter[] = [
   {
+    period: "Next",
+    title: "Next destination",
+    summary:
+      "Where the route runs from here — taken from what is already on the workbench, not a wish list.",
+    highlights: [
+      "Cloud backup and multi-device sync for Shoka",
+      "Paystack payments and barcode scanning aboard",
+      "Deeper Flutter patterns and Firebase architecture",
+    ],
+  },
+  {
     period: "2026",
     title: "Building for real users",
     summary:
@@ -235,19 +251,19 @@ export const experience: Chapter[] = [
 /** Headings for each section, so all page copy lives in this file. */
 export const sections = {
   work: {
-    eyebrow: "Selected work",
-    title: "Things I've built and still stand behind.",
+    eyebrow: "Treasure log",
+    title: "Everything I've hauled back so far.",
     lede: "Mostly solo builds — a point-of-sale app in daily-driver shape, a few full-stack experiments, and the projects I learned the back end on. All of it is public on GitHub.",
   },
   stack: {
-    eyebrow: "The stack",
-    title: "Tools I reach for without thinking.",
+    eyebrow: "Dev arsenal",
+    title: "What I carry aboard.",
     lede: "Flutter first on mobile, React and Next.js on the web, Node and Firebase underneath. The list matters less than knowing when not to add to it.",
   },
   path: {
-    eyebrow: "The path",
+    eyebrow: "The voyage",
     title: "Self-taught, in public.",
-    lede: "No bootcamp and no agency — just a couple of years of shipping, with every step of it visible in the commit history.",
+    lede: "No bootcamp and no agency — just a couple of years of shipping, with every leg of the route visible in the commit history.",
   },
 } as const;
 
@@ -255,6 +271,7 @@ export const contact = {
   eyebrow: "Contact",
   heading: "Got something you want built?",
   lede: "I take on freelance projects and collaborations. Tell me what you're making — email works, and WhatsApp is usually faster.",
+  signOff: "Still sailing.",
   email: "raphaelasiwaju1@gmail.com",
   whatsapp: "+234 706 836 7213",
   whatsappHref: "https://wa.me/2347068367213",
@@ -269,9 +286,9 @@ export const socials = [
 ] as const;
 
 export const navLinks = [
-  { label: "Work", href: "#work" },
-  { label: "About", href: "#about" },
-  { label: "Stack", href: "#stack" },
-  { label: "Path", href: "#path" },
+  { label: "Treasure", href: "#work" },
+  { label: "Log", href: "#about" },
+  { label: "Arsenal", href: "#stack" },
+  { label: "Voyage", href: "#path" },
   { label: "Contact", href: "#contact" },
 ] as const;

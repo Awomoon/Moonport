@@ -7,40 +7,36 @@ import { gsap, registerGsap } from "@/lib/gsap";
 import { prefersReducedMotion, settle } from "@/lib/motion";
 import { projects, sections, type Project } from "@/content/site";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { GlassCard } from "@/components/ui/GlassCard";
+import { DeckCard } from "@/components/ui/DeckCard";
 import { cn, pad } from "@/lib/utils";
 
 /**
- * Card covers. Two accent tokens per card bloom from opposite corners over a
- * dark base, which keeps every cover in the same family while staying
- * distinct — a single linear ramp to transparent just washed out to grey.
+ * Card covers. Each is a scrap of chart: two low currents of colour under a
+ * contour ring and a plotted route, so a card reads as a surveyed location
+ * rather than a gradient swatch.
  */
 const COVER_PAIRS: ReadonlyArray<readonly [string, string]> = [
-  ["--color-aurora", "--color-glow"],
-  ["--color-plasma", "--color-ember"],
-  ["--color-glow", "--color-plasma"],
-  ["--color-ember", "--color-aurora"],
-  ["--color-aurora", "--color-plasma"],
-  ["--color-glow", "--color-ember"],
+  ["--color-gold", "--color-tide"],
+  ["--color-sea", "--color-signal"],
+  ["--color-tide", "--color-sea"],
+  ["--color-signal", "--color-gold"],
+  ["--color-gold", "--color-sea"],
+  ["--color-tide", "--color-signal"],
 ];
 
 function coverStyle(index: number): CSSProperties {
   const [warm, cool] = COVER_PAIRS[index % COVER_PAIRS.length];
-  // Shift the bloom origins per card so a repeated pair never reads identical.
+  // Shift the origins per card so a repeated pair never reads identical.
   const drift = (index % 3) * 11;
   const tint = (token: string, pct: number) =>
     `color-mix(in oklab, var(${token}) ${pct}%, transparent)`;
 
   return {
     backgroundImage: [
-      // Main bloom, top-left.
-      `radial-gradient(92% 132% at ${13 + drift}% -8%, ${tint(warm, 66)}, transparent 58%)`,
-      // Counter bloom, upper-right.
-      `radial-gradient(78% 108% at ${89 - drift}% 16%, ${tint(cool, 52)}, transparent 60%)`,
-      // Faint lift from below so the bottom edge doesn't go flat.
-      `radial-gradient(128% 86% at 50% 116%, ${tint(warm, 28)}, transparent 66%)`,
-      // Glass sheen over a dark floor.
-      "linear-gradient(168deg, rgba(255,255,255,0.08), rgba(4,5,10,0.62))",
+      `radial-gradient(90% 128% at ${14 + drift}% -8%, ${tint(warm, 52)}, transparent 58%)`,
+      `radial-gradient(76% 104% at ${88 - drift}% 18%, ${tint(cool, 40)}, transparent 60%)`,
+      `radial-gradient(126% 84% at 50% 116%, ${tint(warm, 20)}, transparent 66%)`,
+      "linear-gradient(168deg, rgba(255,255,255,0.06), rgba(11,13,16,0.72))",
     ].join(", "),
   };
 }
@@ -60,7 +56,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   const featured = Boolean(project.featured);
 
   return (
-    <GlassCard
+    <DeckCard
       as="li"
       tilt={featured ? 4 : 7}
       style={accentStyle(index)}
@@ -90,7 +86,29 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               style={coverStyle(index)}
               className="absolute inset-0 transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-110"
             />
-            <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(to_right,rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:36px_36px]" />
+            {/* Chart grid */}
+            <div className="absolute inset-0 opacity-25 [background-image:linear-gradient(to_right,rgba(231,218,187,0.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(231,218,187,0.12)_1px,transparent_1px)] [background-size:34px_34px]" />
+
+            {/* Depth contours and a plotted route to the find */}
+            <svg
+              aria-hidden
+              viewBox="0 0 400 160"
+              preserveAspectRatio="none"
+              className="absolute inset-0 h-full w-full text-parchment opacity-[0.22]"
+            >
+              <ellipse cx="308" cy="66" rx="70" ry="34" fill="none" stroke="currentColor" strokeWidth="0.8" />
+              <ellipse cx="308" cy="66" rx="46" ry="21" fill="none" stroke="currentColor" strokeWidth="0.8" />
+              <ellipse cx="308" cy="66" rx="24" ry="10" fill="none" stroke="currentColor" strokeWidth="0.8" />
+              <path
+                d="M18 132 C 90 120, 120 82, 196 90 S 268 78, 300 68"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeDasharray="5 6"
+                opacity="0.9"
+              />
+              <path d="M303 63l10 6-10 6z" fill="currentColor" />
+            </svg>
             <span className="font-display absolute -bottom-6 left-5 text-[7rem] leading-none font-semibold text-white/12 select-none">
               {pad(index + 1)}
             </span>
@@ -106,6 +124,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
       {/* Body */}
       <div className="flex flex-1 flex-col gap-4 p-6 md:p-7">
+        {featured ? (
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-gold/30 bg-gold/10 px-3 py-1.5 font-mono text-[10px] tracking-[0.2em] text-gold uppercase">
+            <svg viewBox="0 0 16 16" className="size-3" fill="currentColor" aria-hidden>
+              <path d="M3 1.5v13a.5.5 0 0 0 1 0V9.2l8.2-3a.5.5 0 0 0 0-.94L4 2.3V1.5a.5.5 0 0 0-1 0Z" />
+            </svg>
+            Flagship
+          </span>
+        ) : null}
+
         <div className="flex items-baseline justify-between gap-4">
           <h3 className="font-display text-xl font-semibold tracking-tight md:text-2xl">
             {project.title}
@@ -139,7 +166,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                 href={project.live}
                 target="_blank"
                 rel="noreferrer"
-                className="group/link inline-flex items-center gap-1.5 text-sm text-mist transition-colors hover:text-aurora"
+                className="group/link inline-flex items-center gap-1.5 text-sm text-mist transition-colors hover:text-gold"
               >
                 Live
                 <svg
@@ -168,7 +195,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </div>
         </div>
       </div>
-    </GlassCard>
+    </DeckCard>
   );
 }
 

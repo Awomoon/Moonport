@@ -5,7 +5,7 @@ import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { gsap, registerGsap } from "@/lib/gsap";
 import { cn } from "@/lib/utils";
 
-type GlassCardProps = {
+type DeckCardProps = {
   children: React.ReactNode;
   className?: string;
   /** Degrees of 3D lean toward the pointer. 0 disables the tilt. */
@@ -20,13 +20,13 @@ type GlassCardProps = {
  * tilt. The highlight is driven by CSS custom properties so it costs one
  * composited repaint rather than a React render per pointer move.
  */
-export function GlassCard({
+export function DeckCard({
   children,
   className,
   tilt = 6,
   as: Tag = "div",
   style,
-}: GlassCardProps) {
+}: DeckCardProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useIsomorphicLayoutEffect(() => {
@@ -84,15 +84,15 @@ export function GlassCard({
       ref={ref}
       style={style}
       className={cn(
-        "glass glass-rim group relative isolate overflow-hidden rounded-3xl [transform-style:preserve-3d] [perspective:1200px]",
+        "deck rim group relative isolate overflow-hidden rounded-3xl [transform-style:preserve-3d] [perspective:1200px]",
         className,
       )}
     >
       {/* Pointer spotlight: a broad tinted wash plus a tighter hot spot, so the
-          surface reads as wet glass catching a light rather than a flat tint. */}
+          surface reads as wet deck catching a light rather than a flat tint. */}
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[var(--spot-opacity,0)] transition-opacity duration-500 [background:radial-gradient(460px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-tint,var(--color-plasma))_26%,transparent),transparent_62%),radial-gradient(140px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-hot,var(--color-aurora))_20%,transparent),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 opacity-[var(--spot-opacity,0)] transition-opacity duration-500 [background:radial-gradient(460px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-tint,var(--color-sea))_26%,transparent),transparent_62%),radial-gradient(140px_circle_at_var(--spot-x,50%)_var(--spot-y,50%),color-mix(in_oklab,var(--spot-hot,var(--color-gold))_20%,transparent),transparent_70%)]"
       />
       {children}
     </Tag>

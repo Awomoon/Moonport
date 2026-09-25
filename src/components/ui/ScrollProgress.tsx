@@ -34,7 +34,7 @@ export function ScrollProgress() {
     >
       <div
         ref={bar}
-        className="h-full w-full bg-linear-90 from-aurora via-glow to-ember shadow-[0_0_12px_rgba(94,234,212,0.8)]"
+        className="h-full w-full bg-linear-90 from-gold via-tide to-signal shadow-[0_0_12px_rgba(94,234,212,0.8)]"
       />
     </div>
   );
